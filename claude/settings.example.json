@@ -1,0 +1,55 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(gh pr create)",
+      "Bash(gh pr create *)",
+      "Bash(gh pr merge)",
+      "Bash(gh pr merge *)"
+    ]
+  },
+  "model": "opus",
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/block-git-write.sh",
+            "timeout": 10,
+            "statusMessage": "Checking git-write guard"
+          }
+        ]
+      },
+      {
+        "matcher": "Bash|EnterWorktree|Agent|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash ~/.claude/hooks/block-branch-worktree.sh",
+            "timeout": 10,
+            "statusMessage": "Checking branch/worktree guard"
+          }
+        ]
+      }
+    ]
+  },
+  "worktree": {
+    "bgIsolation": "none"
+  },
+  "enabledPlugins": {
+    "superpowers@claude-plugins-official": true,
+    "claude-security@claude-plugins-official": true
+  },
+  "extraKnownMarketplaces": {
+    "karpathy-skills": {
+      "source": {
+        "source": "github",
+        "repo": "forrestchang/andrej-karpathy-skills"
+      }
+    }
+  },
+  "advisorModel": "opus",
+  "theme": "dark",
+  "agentPushNotifEnabled": true
+}

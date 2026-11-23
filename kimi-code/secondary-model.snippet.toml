@@ -1,0 +1,19 @@
+# Merge into the existing config.toml after /login.
+# Keep provider, OAuth, primary model, services, permissions, and unrelated settings unchanged.
+
+[thinking]
+enabled = true
+effort = "high"
+
+[models."kimi-code/kimi-for-coding".overrides]
+default_effort = "low"
+
+[models."kimi-code/k3".overrides]
+default_effort = "high"
+
+[secondary_model]
+default_model = "kimi-code/kimi-for-coding"
+
+[secondary_model.models]
+"kimi-code/kimi-for-coding" = "Default low effort. Use for simple research, inventories, summaries, and routine edits."
+"kimi-code/k3" = "High effort. Use for harder investigations and debugging that need more reasoning."
